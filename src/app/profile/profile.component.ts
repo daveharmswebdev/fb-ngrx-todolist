@@ -21,16 +21,30 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.profile$ = this.profileService.getProfile();
-    this.createForm();
+    this.createProfileForm();
+    this.setProfileForm();
   }
 
-  createForm() {
+  createProfileForm() {
     this.profileForm = this.fb.group({
       id: '',
       firstName: '',
       middleName: '',
       lastName: ''
     });
+  }
+
+  setProfileForm() {
+    this.profile$.subscribe(
+      profile => {
+        this.profileForm.patchValue({
+          id: profile.id,
+          firstName: profile.firstName,
+          middleName: profile.middleName || '',
+          lastName: profile.lastName
+        });
+      }
+    );
   }
 
 }
