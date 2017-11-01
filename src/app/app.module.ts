@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { storeReducer } from './store/storeReducer';
+import { INIITAL_APP_STATE } from './store/appState';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +20,8 @@ import { ProfileService } from './profile/profile.service';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore(storeReducer, INIITAL_APP_STATE)
   ],
   providers: [
     ProfileService
