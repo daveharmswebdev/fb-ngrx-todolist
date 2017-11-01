@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IProfile } from './profile';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { IProfile } from './profile';
 
 const testProfile: IProfile = {
-  id: '1a',
+  id: 1,
   firstName: 'Dave',
   middleName: 'Cheese',
   lastName: 'Barns'
@@ -13,11 +14,12 @@ const testProfile: IProfile = {
 
 
 export class ProfileService {
+  private _serviceUrl = 'http://localhost:3000/profiles';
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getProfile() {
-    return Observable.of(testProfile);
+    return this.http.get(`${this._serviceUrl}/1`);
   }
 
 }

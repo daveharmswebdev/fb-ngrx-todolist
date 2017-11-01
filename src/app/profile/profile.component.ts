@@ -20,9 +20,15 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.profile$ = this.profileService.getProfile();
     this.createProfileForm();
-    this.setProfileForm();
+    this.profileService.getProfile()
+    .map(profile => profile.json())
+    .subscribe(
+      profile => {
+        this.profile$ = Observable.of(profile);
+        this.setProfileForm();
+      }
+    );
   }
 
   createProfileForm() {
