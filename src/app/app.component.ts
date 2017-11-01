@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState } from './store/appState';
 import { IProfile } from './profile/profile';
+import { LoadSingleProfileAction } from './profile/profile.actions';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new LoadSingleProfileAction());
     this.profile$.subscribe(
-      console.log
+      profile => console.log(profile)
     );
   }
 }

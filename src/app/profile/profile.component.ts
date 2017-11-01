@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IProfile} from './profile';
 import { ProfileService } from './profile.service';
@@ -10,47 +9,52 @@ import { ProfileService } from './profile.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  profile$: Observable<IProfile>;
+export class ProfileComponent implements OnInit, OnChanges {
+  @Input() profile: IProfile;
   profileForm: FormGroup;
 
+  get updateButtonIsDisabled(): boolean {
+    return !this.profileForm.dirty || !this.profileForm.valid;
+  }
+
   constructor(
-    private profileService: ProfileService,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.createProfileForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['profile'] && this.profile) {
+      this.setProfileForm(this.profile);
+    }
+  }
 
   ngOnInit() {
-    this.createProfileForm();
-    this.profileService.getProfile()
-    .map(profile => profile.json())
-    .subscribe(
-      profile => {
-        this.profile$ = Observable.of(profile);
-        this.setProfileForm();
-      }
-    );
+    if (this.profile) {
+      console.log(this.profile);
+    }
+  }
+
+  setProfileForm(profile: IProfile) {
+    this.profileForm.patchValue({
+      id: profile.id,
+      firstName: profile.firstName,
+      middleName: profile.middleName || '',
+      lastName: profile.lastName,
+    });
   }
 
   createProfileForm() {
     this.profileForm = this.fb.group({
-      id: '',
-      firstName: '',
+      id: [{value: '', disabled: true}, Validators.required],
+      firstName: ['', Validators.required],
       middleName: '',
-      lastName: ''
+      lastName: ['', Validators.required],
     });
   }
 
-  setProfileForm() {
-    this.profile$.subscribe(
-      profile => {
-        this.profileForm.patchValue({
-          id: profile.id,
-          firstName: profile.firstName,
-          middleName: profile.middleName || '',
-          lastName: profile.lastName
-        });
-      }
-    );
+  updateProfile() {
+    console.log('update profile!', this.profileForm.getRawValue());
   }
 
 }

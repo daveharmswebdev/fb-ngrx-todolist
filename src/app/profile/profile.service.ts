@@ -18,8 +18,9 @@ export class ProfileService {
 
   constructor(private http: Http) { }
 
-  getProfile() {
-    return this.http.get(`${this._serviceUrl}/1`);
+  getProfile(): Observable<IProfile> {
+    return this.http.get(`${this._serviceUrl}/1`)
+    .map(profile => profile.json());
   }
 
 }

@@ -1,6 +1,13 @@
-<form [formGroup]="profileForm" novalidate>
+<form [formGroup]="profileForm" novalidate (ngSubmit)="updateProfile()">
   <input formControlName="id">
   <input formControlName="firstName">
   <input formControlName="middleName">
   <input formControlName="lastName">
+  <button
+    type="submit"
+    [disabled]="updateButtonIsDisabled">Update</button>
+  <br>
+  <p>Valid: {{profileForm.valid}}</p>
+  <p>Dirty: {{profileForm.dirty}}</p>
+  <p>button disabled: {{updateButtonIsDisabled}}</p>
 </form>
