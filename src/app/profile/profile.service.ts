@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IProfile } from './profile';
 
@@ -21,6 +21,22 @@ export class ProfileService {
   getProfile(): Observable<IProfile> {
     return this.http.get(`${this._serviceUrl}/1`)
     .map(profile => profile.json());
+  }
+
+  updateProfile(newProfile: IProfile) {
+    const body = JSON.stringify(newProfile);
+    console.log(body);
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.patch(
+      `${this._serviceUrl}/1`,
+      body,
+      options
+    );
   }
 
 }

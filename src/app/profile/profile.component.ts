@@ -1,8 +1,10 @@
+import { UpdateProfileAction } from './profile.actions';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 import { IProfile} from './profile';
-import { ProfileService } from './profile.service';
+import { AppState } from './../store/appState';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,8 @@ export class ProfileComponent implements OnInit, OnChanges {
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<AppState>
   ) {
     this.createProfileForm();
   }
@@ -54,7 +57,8 @@ export class ProfileComponent implements OnInit, OnChanges {
   }
 
   updateProfile() {
-    console.log('update profile!', this.profileForm.getRawValue());
+    const newProfile = this.profileForm.getRawValue();
+    this.store.dispatch(new UpdateProfileAction(newProfile));
   }
 
 }

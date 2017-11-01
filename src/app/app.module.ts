@@ -1,4 +1,3 @@
-import { LoadSingleProfileEffectService } from './store/effects/load-single-profile-effect.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -14,6 +13,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeReducer } from './store/storeReducer';
 import { INIITAL_APP_STATE } from './store/appState';
+import { UpdateProfileEffectsService } from './store/effects/update-profile-effects.service';
+import { LoadSingleProfileEffectService } from './store/effects/load-single-profile-effect.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { INIITAL_APP_STATE } from './store/appState';
     HttpModule,
     StoreModule.provideStore(storeReducer, INIITAL_APP_STATE),
     EffectsModule.run(LoadSingleProfileEffectService),
+    EffectsModule.run(UpdateProfileEffectsService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [
