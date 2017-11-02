@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
+import { TodoListService } from './todo-list/todo-list.service';
 
 // ngrx
 import { StoreModule } from '@ngrx/store';
@@ -33,7 +34,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [
-    ProfileService
+    ProfileService,
+    TodoListService
   ],
   bootstrap: [AppComponent]
 })

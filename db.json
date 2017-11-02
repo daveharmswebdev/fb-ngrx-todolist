@@ -1,6 +1,5 @@
 {
-  "profiles": [
-    {
+  "profiles": [{
       "id": 1,
       "firstName": "Jeff",
       "middleName": "Cheese",
@@ -12,7 +11,17 @@
       "lastName": "Sessions"
     }
   ],
-  "todolists": [
-
+  "todolists": [{
+      "id": 1,
+      "profileId": 1,
+      "listName": "Lawn Care",
+      "comment": "Have to do or else"
+    },
+    {
+      "id": 2,
+      "profileId": 2,
+      "listName": "Birthday Party",
+      "comment": "On Sunday"
+    }
   ]
 }
