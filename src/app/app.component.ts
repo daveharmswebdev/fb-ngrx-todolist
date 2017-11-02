@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadSingleProfileAction());
-    this.profile$.subscribe(
+    this.profile$.skip(1).take(1).subscribe(
       profile => {
         if (profile) {
           this.store.dispatch(new LoadTodoListsAction(profile.id));

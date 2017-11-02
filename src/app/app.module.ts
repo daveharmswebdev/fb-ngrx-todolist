@@ -17,6 +17,7 @@ import { INIITAL_APP_STATE } from './store/appState';
 import { UpdateProfileEffectsService } from './store/effects/update-profile-effects.service';
 import { LoadSingleProfileEffectService } from './store/effects/load-single-profile-effect.service';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { LoadTodoListsEffectsService } from './store/effects/load-todo-lists-effects.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     StoreModule.provideStore(storeReducer, INIITAL_APP_STATE),
     EffectsModule.run(LoadSingleProfileEffectService),
     EffectsModule.run(UpdateProfileEffectsService),
+    EffectsModule.run(LoadTodoListsEffectsService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [
