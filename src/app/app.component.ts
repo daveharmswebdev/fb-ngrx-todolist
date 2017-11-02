@@ -1,8 +1,10 @@
+import { LoadTodoListsAction } from './todo-list/todo-list.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState } from './store/appState';
+import { ITodoList } from './todo-list/todo-list';
 import { IProfile } from './profile/profile';
 import { LoadSingleProfileAction } from './profile/profile.actions';
 
@@ -13,16 +15,23 @@ import { LoadSingleProfileAction } from './profile/profile.actions';
 })
 export class AppComponent implements OnInit {
   profile$: Observable<IProfile>;
+  todoLists$: Observable<ITodoList>;
   title = 'app';
 
   constructor(private store: Store<AppState>) {
     this.profile$ = this.store.select('profile');
+    this.todoLists$ = this.store.select('todoLists');
   }
 
   ngOnInit() {
     this.store.dispatch(new LoadSingleProfileAction());
     this.profile$.subscribe(
-      profile => console.log(profile)
+      profile => {
+        if (profile) {
+          this.store.dispatch(new LoadTodoListsAction(profile.id));
+        }
+      }
     );
   }
+
 }
