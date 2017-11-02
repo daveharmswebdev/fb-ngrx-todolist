@@ -12,4 +12,18 @@ export class TodoListService {
     return this.http.get(`${this._serviceUrl}?profileId=${profileId}`)
     .map(todoLists => todoLists.json());
   }
+
+  postNewTodoList(newTodoList) {
+    const body = JSON.stringify(newTodoList);
+    console.log(body);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(
+      `${this._serviceUrl}`,
+      JSON.stringify(newTodoList),
+      options
+    );
+  }
 }

@@ -15,17 +15,13 @@ export class ProfileService {
   }
 
   updateProfile(newProfile: IProfile) {
-    const body = JSON.stringify(newProfile);
-    console.log(body);
-    // tslint:disable-next-line:no-debugger
-    debugger;
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({ headers: headers });
 
     return this.http.patch(
       `${this._serviceUrl}/1`,
-      body,
+      JSON.stringify(newProfile),
       options
     );
   }

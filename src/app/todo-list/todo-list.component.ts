@@ -51,8 +51,11 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   addNewTodoList() {
-    console.log('add*****');
-    this.newTodoList.next({test: 'test'});
+    const newTodo = {
+      listName: 'test name',
+      comment: 'test comment'
+    };
+    this.newTodoList.next(newTodo);
   }
 
 }

@@ -1,4 +1,4 @@
-import { LoadTodoListsAction } from './todo-list/todo-list.actions';
+import { LoadTodoListsAction, AddNewTodoListAction } from './todo-list/todo-list.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
 
   onNewTodoList(event) {
     console.log('event captured', event);
+    this.store.dispatch(new AddNewTodoListAction(event));
   }
 
 }

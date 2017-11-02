@@ -1,4 +1,11 @@
+import { Action } from '@ngrx/store';
+import * as _ from 'lodash';
+
+import { AppState } from './appState';
+import { ITodoList } from './../todo-list/todo-list';
 import {
+  AddNewTodoListAction,
+  ADD_NEW_TODO_LIST_ACTION,
   TODO_LISTS_LOADED_ACTION,
   TodoListsLoadedAction
 } from '../todo-list/todo-list.actions';
@@ -8,9 +15,6 @@ import {
   UPDATE_PROFILE_ACTION,
   UpdateProfileAction
 } from './../profile/profile.actions';
-import { Action } from '@ngrx/store';
-import { AppState } from './appState';
-import * as _ from 'lodash';
 
 function handleTodoListsLoadedAction(state: AppState, action: TodoListsLoadedAction) {
   const newState = _.cloneDeep(state);
@@ -30,6 +34,19 @@ function handleUpdateProfileAction(state: AppState, action: UpdateProfileAction)
   });
 }
 
+function handleAddNewTodoListAction(state: AppState, action: AddNewTodoListAction) {
+  const newState = _.cloneDeep(state);
+  const newTodoList: ITodoList = {
+    id: 10,
+    profileId: state.profile.id,
+    listName: action.payload.listName,
+    comment: action.payload.comment
+  };
+  console.log('new todo list', newTodoList);
+  newState.todoLists.push(newTodoList);
+  return newState;
+}
+
 export function storeReducer(state: AppState, action: Action) {
   switch (action.type) {
     case SINGLE_PROFILE_LOADED_ACTION:
@@ -38,6 +55,8 @@ export function storeReducer(state: AppState, action: Action) {
       return handleUpdateProfileAction(state, <any>action);
     case TODO_LISTS_LOADED_ACTION:
       return handleTodoListsLoadedAction(state, <any>action);
+    case ADD_NEW_TODO_LIST_ACTION:
+      return handleAddNewTodoListAction(state, <any>action);
     default:
       return state;
   }
