@@ -1,4 +1,10 @@
-import { LoadTodoListsAction, AddNewTodoListAction } from './todo-list/todo-list.actions';
+import { UpdateProfileEffectsService } from './store/effects/update-profile-effects.service';
+import {
+  LoadTodoListsAction,
+  AddNewTodoListAction,
+  UpdateTodoListBackend,
+  DeleteTodoListBackend
+} from './todo-list/todo-list.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -35,8 +41,17 @@ export class AppComponent implements OnInit {
   }
 
   onNewTodoList(event) {
-    console.log('event captured', event);
     this.store.dispatch(new AddNewTodoListAction(event));
+  }
+
+  updateTodoList(event) {
+    console.log('update');
+    this.store.dispatch(new UpdateTodoListBackend(event));
+  }
+
+  deleteTodoList(event) {
+    console.log('delete');
+    this.store.dispatch(new DeleteTodoListBackend(event));
   }
 
 }

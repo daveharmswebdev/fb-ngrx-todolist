@@ -18,6 +18,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 export class TodoListComponent implements OnInit, OnChanges {
   @Input() todoLists: ITodoList[];
   @Output() newTodoList = new EventEmitter();
+  @Output() todoListForUpdate = new EventEmitter();
+  @Output() todoListForDeletion = new EventEmitter();
   todoListForm: FormGroup;
 
   get todoListArray(): FormArray {
@@ -56,6 +58,14 @@ export class TodoListComponent implements OnInit, OnChanges {
       comment: 'test comment'
     };
     this.newTodoList.next(newTodo);
+  }
+
+  testUpdate(todoList) {
+    this.todoListForUpdate.next(todoList);
+  }
+
+  testDelete(todoList) {
+    this.todoListForDeletion.next(todoList);
   }
 
 }
