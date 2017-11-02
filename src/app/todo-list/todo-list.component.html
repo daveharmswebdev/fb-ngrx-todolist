@@ -1,3 +1,12 @@
-<p>
-  todo-list works!
-</p>
+<h4>Todo Lists</h4>
+<form [formGroup]="todoListForm">
+  <div formArrayName="todoListArray">
+    <div *ngFor="let todoList of todoListArray.controls; let i = index" [formGroupName]="i">
+      <input type="text" formControlName="id" placeholder="id">
+      <input type="text" formControlName="profileId" placeholder="profileId">
+      <input type="text" formControlName="listName" placeholder="listName">
+      <input type="text" formControlName="comment" placeholder="comment">
+    </div>
+  </div>
+</form>
+<button type="button" (click)="addNewTodoList()">Add</button>

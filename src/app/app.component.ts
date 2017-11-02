@@ -34,4 +34,8 @@ export class AppComponent implements OnInit {
     );
   }
 
+  onNewTodoList(event) {
+    console.log('event captured', event);
+  }
+
 }

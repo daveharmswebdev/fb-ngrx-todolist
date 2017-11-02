@@ -1,9 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{title}}!
+    Over-Engineered Todo List App!
   </h1>
   <app-profile [profile]="profile$ | async"></app-profile>
-  <app-todo-list [todoLists]="todoLists$ | async"></app-todo-list>
+  <app-todo-list
+    [todoLists]="todoLists$ | async"
+    (newTodoList)="onNewTodoList($event)"
+  ></app-todo-list>
 </div>
 
