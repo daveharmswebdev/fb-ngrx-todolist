@@ -9,9 +9,7 @@ import { TodoListService } from '../../todo-list/todo-list.service';
 export class LoadTodoListsEffectsService {
   @Effect() todoLists$: Observable<Action> = this.actions$
     .ofType(LOAD_TODO_LISTS_ACTION)
-    .do(val => console.log(val))
     .switchMap(action => this.todoListsService.getTodoLists(action.payload))
-    .do(val => console.log(val))
     .map(todoLists => new TodoListsLoadedAction(todoLists));
 
   constructor(
