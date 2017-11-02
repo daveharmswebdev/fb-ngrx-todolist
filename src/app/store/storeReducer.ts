@@ -1,3 +1,4 @@
+import { UPDATE_TODO_LISTS_VIEW, UpdateTodoListsView } from './../todo-list/todo-list.actions';
 import { Action } from '@ngrx/store';
 import * as _ from 'lodash';
 
@@ -34,15 +35,14 @@ function handleUpdateProfileAction(state: AppState, action: UpdateProfileAction)
   });
 }
 
-function handleAddNewTodoListAction(state: AppState, action: AddNewTodoListAction) {
+function handleUpdateTodoListsView(state: AppState, action: UpdateTodoListsView) {
   const newState = _.cloneDeep(state);
   const newTodoList: ITodoList = {
-    id: 10,
-    profileId: state.profile.id,
+    id: action.payload.id,
+    profileId: action.payload.profileId,
     listName: action.payload.listName,
     comment: action.payload.comment
   };
-  console.log('new todo list', newTodoList);
   newState.todoLists.push(newTodoList);
   return newState;
 }
@@ -55,8 +55,8 @@ export function storeReducer(state: AppState, action: Action) {
       return handleUpdateProfileAction(state, <any>action);
     case TODO_LISTS_LOADED_ACTION:
       return handleTodoListsLoadedAction(state, <any>action);
-    case ADD_NEW_TODO_LIST_ACTION:
-      return handleAddNewTodoListAction(state, <any>action);
+    case UPDATE_TODO_LISTS_VIEW:
+      return handleUpdateTodoListsView(state, <any>action);
     default:
       return state;
   }

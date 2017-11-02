@@ -15,7 +15,6 @@ export class TodoListService {
 
   postNewTodoList(newTodoList) {
     const body = JSON.stringify(newTodoList);
-    console.log(body);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({ headers: headers });
