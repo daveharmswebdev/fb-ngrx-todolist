@@ -25,4 +25,17 @@ export class TodoListService {
       options
     );
   }
+
+  updateTodoList(updateData) {
+    const todoListId = updateData.id;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.patch(
+      `${this._serviceUrl}/${todoListId}`,
+      JSON.stringify(updateData),
+      options
+    );
+  }
 }

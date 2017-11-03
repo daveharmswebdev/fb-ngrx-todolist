@@ -1,6 +1,12 @@
-import { UPDATE_TODO_LISTS_VIEW, UpdateTodoListsView } from './../todo-list/todo-list.actions';
+import {
+  UPDATE_TODO_LISTS_VIEW,
+  UpdateTodoListsView,
+  UPDATE_TODOLIST_BACKEND_SUCCESS,
+  UpdateTodoListBackend
+} from './../todo-list/todo-list.actions';
 import { Action } from '@ngrx/store';
 import * as _ from 'lodash';
+import * as R from 'ramda';
 
 import { AppState } from './appState';
 import { ITodoList } from './../todo-list/todo-list';
@@ -47,6 +53,16 @@ function handleUpdateTodoListsView(state: AppState, action: UpdateTodoListsView)
   return newState;
 }
 
+function handleUpdateTodoListBackendSuccess(state: AppState, action: UpdateTodoListBackend) {
+  const index = state.todoLists.findIndex(element => element.id === action.payload.id);
+  const newState = _.cloneDeep(state);
+  console.log('what I want to change', newState.todoLists[index]);
+  console.log('what I want to change it to', action.payload);
+  newState.todoLists[index] = action.payload;
+
+  return newState;
+}
+
 export function storeReducer(state: AppState, action: Action) {
   switch (action.type) {
     case SINGLE_PROFILE_LOADED_ACTION:
@@ -57,6 +73,8 @@ export function storeReducer(state: AppState, action: Action) {
       return handleTodoListsLoadedAction(state, <any>action);
     case UPDATE_TODO_LISTS_VIEW:
       return handleUpdateTodoListsView(state, <any>action);
+    case UPDATE_TODOLIST_BACKEND_SUCCESS:
+      return handleUpdateTodoListBackendSuccess(state, <any>action);
     default:
       return state;
   }
