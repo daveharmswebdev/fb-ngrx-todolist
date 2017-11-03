@@ -6,6 +6,7 @@ export const TODO_LISTS_LOADED_ACTION = 'TODO_LISTS_LOADED_ACTION';
 export const ADD_NEW_TODO_LIST_ACTION = 'ADD_NEW_TODO_LIST_ACTION';
 export const UPDATE_TODO_LISTS_VIEW = 'UPDATE_TODO_LISTS_VIEW';
 export const DELETE_TODOLIST_BACKEND = 'DELETE_TODOLIST_BACKEND';
+export const DELETE_TODOLIST_BACKEND_SUCCESS = 'DELETE_TODOLIST_BACKEND_SUCCESS';
 export const UPDATE_TODOLIST_BACKEND = 'UPDATE_TODOLIST_BACKEND';
 export const UPDATE_TODOLIST_BACKEND_SUCCESS = 'UPDATE_TODOLIST_BACKEND_SUCCESS';
 
@@ -39,6 +40,12 @@ export class DeleteTodoListBackend implements Action {
   constructor(public payload: ITodoList) {}
 }
 
+export class DeleteTodoListBackendSuccess implements Action {
+  readonly type = DELETE_TODOLIST_BACKEND_SUCCESS;
+
+  constructor(public payload?: any) {}
+}
+
 export class UpdateTodoListBackend implements Action {
   readonly type = UPDATE_TODOLIST_BACKEND;
 
@@ -50,4 +57,3 @@ export class UpdateTodoListBackendSuccess implements Action {
 
   constructor(public payload: any) {}
 }
-

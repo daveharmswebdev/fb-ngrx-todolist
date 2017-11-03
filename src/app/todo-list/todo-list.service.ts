@@ -31,11 +31,25 @@ export class TodoListService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({ headers: headers });
-
+    console.log(updateData, todoListId);
     return this.http.patch(
       `${this._serviceUrl}/${todoListId}`,
       JSON.stringify(updateData),
       options
     );
+  }
+
+  deleteTodoList(deleteData) {
+    const deleteId = deleteData.id;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Delete-ID', deleteId);
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.delete(
+      `${this._serviceUrl}/${deleteId}`,
+      options
+    );
+
   }
 }

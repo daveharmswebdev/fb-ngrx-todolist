@@ -2,11 +2,13 @@ import {
   UPDATE_TODO_LISTS_VIEW,
   UpdateTodoListsView,
   UPDATE_TODOLIST_BACKEND_SUCCESS,
-  UpdateTodoListBackend
+  UpdateTodoListBackendSuccess,
+  UpdateTodoListBackend,
+  DELETE_TODOLIST_BACKEND_SUCCESS,
+  DeleteTodoListBackendSuccess
 } from './../todo-list/todo-list.actions';
 import { Action } from '@ngrx/store';
 import * as _ from 'lodash';
-import * as R from 'ramda';
 
 import { AppState } from './appState';
 import { ITodoList } from './../todo-list/todo-list';
@@ -53,12 +55,20 @@ function handleUpdateTodoListsView(state: AppState, action: UpdateTodoListsView)
   return newState;
 }
 
-function handleUpdateTodoListBackendSuccess(state: AppState, action: UpdateTodoListBackend) {
+function handleUpdateTodoListBackendSuccess(state: AppState, action: UpdateTodoListBackendSuccess) {
   const index = state.todoLists.findIndex(element => element.id === action.payload.id);
   const newState = _.cloneDeep(state);
-  console.log('what I want to change', newState.todoLists[index]);
-  console.log('what I want to change it to', action.payload);
   newState.todoLists[index] = action.payload;
+
+  return newState;
+}
+
+function handleDeleteTodoListBackendSuccess(state: AppState, action: DeleteTodoListBackendSuccess) {
+  console.log(action.payload);
+  const index = state.todoLists.findIndex(element => element.id === action.payload);
+  const newState = _.cloneDeep(state);
+  console.log('what i want to splice', newState.todoLists[index]);
+  newState.todoLists.splice(index, 1);
 
   return newState;
 }
@@ -75,6 +85,8 @@ export function storeReducer(state: AppState, action: Action) {
       return handleUpdateTodoListsView(state, <any>action);
     case UPDATE_TODOLIST_BACKEND_SUCCESS:
       return handleUpdateTodoListBackendSuccess(state, <any>action);
+    case DELETE_TODOLIST_BACKEND_SUCCESS:
+      return handleDeleteTodoListBackendSuccess(state, <any>action);
     default:
       return state;
   }

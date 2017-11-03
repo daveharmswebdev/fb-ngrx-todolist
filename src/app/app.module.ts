@@ -20,6 +20,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { LoadTodoListsEffectsService } from './store/effects/load-todo-lists-effects.service';
 import { AddNewTodoListEffectsService } from './store/effects/add-new-todo-list-effects.service';
 import { UpdateTodoListEffectsService } from './store/effects/update-todolist-effects.service';
+import { DeleteTodoListEffectsService } from './store/effects/delete-todolist-effects.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { UpdateTodoListEffectsService } from './store/effects/update-todolist-ef
     EffectsModule.run(LoadTodoListsEffectsService),
     EffectsModule.run(AddNewTodoListEffectsService),
     EffectsModule.run(UpdateTodoListEffectsService),
+    EffectsModule.run(DeleteTodoListEffectsService),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [

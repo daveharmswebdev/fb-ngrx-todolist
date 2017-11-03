@@ -14,12 +14,6 @@
   ],
   "todolists": [
     {
-      "id": 1,
-      "profileId": 1,
-      "listName": "a",
-      "comment": "b"
-    },
-    {
       "id": 2,
       "profileId": 2,
       "listName": "Birthday Party",
@@ -27,49 +21,13 @@
     },
     {
       "profileId": 1,
-      "listName": "c",
-      "comment": "d",
-      "id": 3
-    },
-    {
-      "profileId": 1,
-      "listName": "e",
-      "comment": "f",
-      "id": 4
-    },
-    {
-      "profileId": 1,
-      "listName": "g",
-      "comment": "h",
-      "id": 5
-    },
-    {
-      "profileId": 1,
-      "listName": "left",
-      "comment": "right",
-      "id": 6
-    },
-    {
-      "profileId": 1,
-      "listName": "small",
-      "comment": "big",
-      "id": 7
-    },
-    {
-      "profileId": 1,
-      "listName": "go hasdfasdf",
-      "comment": "test comment",
+      "listName": "100",
+      "comment": "100",
       "id": 8
     },
     {
       "profileId": 1,
       "listName": "test name",
-      "comment": "test comment",
-      "id": 9
-    },
-    {
-      "profileId": 1,
-      "listName": "test namessss",
       "comment": "test comment",
       "id": 10
     },
@@ -77,7 +35,13 @@
       "profileId": 1,
       "listName": "test name",
       "comment": "test comment",
-      "id": 11
+      "id": 20
+    },
+    {
+      "profileId": 1,
+      "listName": "b",
+      "comment": "b",
+      "id": 21
     }
   ]
 }

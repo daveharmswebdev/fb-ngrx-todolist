@@ -4,20 +4,21 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { TodoListService } from './../../todo-list/todo-list.service';
 import {
-  UPDATE_TODOLIST_BACKEND,
-  UpdateTodoListBackendSuccess
+  DELETE_TODOLIST_BACKEND,
+  DeleteTodoListBackendSuccess
 } from './../../todo-list/todo-list.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from './../appState';
+import { parseFromUrl } from '../../shared/parseIdFromUrl';
 
 @Injectable()
-export class UpdateTodoListEffectsService {
+export class DeleteTodoListEffectsService {
   @Effect() todoList$: Observable<any> = this.actions$
-    .ofType(UPDATE_TODOLIST_BACKEND)
-    .switchMap(action => this.todoListService.updateTodoList(action.payload))
-    .map(response => response.json())
-    .debug('updated backend')
-    .map(response => new UpdateTodoListBackendSuccess(response));
+    .ofType(DELETE_TODOLIST_BACKEND)
+    .switchMap(action => this.todoListService.deleteTodoList(action.payload))
+    .map(response => parseFromUrl(response.url))
+    .debug('headers')
+    .map(id => new DeleteTodoListBackendSuccess(id));
 
   constructor(
     private store: Store<AppState>,
